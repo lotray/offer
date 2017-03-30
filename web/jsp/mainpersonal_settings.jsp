@@ -86,11 +86,26 @@
 			document.getElementById("emailType1").style.display="none";
 			document.getElementById("emailType2").style.display="none";
 			document.getElementById("emailType3").style.display="";
+			
+			var url = "change/changeUserMsgStatus.do";
+			var data = ajaxSumbitNoform(url, "1");
+			if(data == "success"){
+				alert("保存成功！");
+			}else{
+				alert("保存出错！");
+			}
 		}
 		if(ret == '2'){
 			document.getElementById("emailType1").style.display="none";
 			document.getElementById("emailType2").style.display="none";
 			document.getElementById("emailType3").style.display="";
+			var url = "change/changeUserMsgStatus.do";
+			var data = ajaxSumbitNoform(url, "0");
+			if(data == "success"){
+				alert("保存成功！");
+			}else{
+				alert("保存出错！");
+			}
 		}
 	}
 </script>
