@@ -1121,6 +1121,7 @@ public class OfferUserController extends BaseController {
 		    	   offerUser.setEmailmsg(request.getParameter("userStatus"));
 		    	   
 		    	   offerUserService.updateOfferUser(offerUser);
+		    	   request.getSession().setAttribute("id", request.getParameter("userIdString"));
 		    	   if ("2".equals(offerUser.getIsoffer())) {
 		    		   response.sendRedirect("../jsp/firm_resume_add.jsp");
 		    	   }else {

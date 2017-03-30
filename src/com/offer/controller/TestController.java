@@ -109,9 +109,9 @@ public class TestController extends BaseController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			OfferUser offerUser = offerUserService.islogin(form);
          if (offerUser != null) {
-            if("0".equals(offerUser.getStatus())){
-           	 return toJson(offerUser.getStatus());
-            }
+//            if("0".equals(offerUser.getStatus())){
+//           	 return toJson(offerUser.getStatus());
+//            }
             request.getSession().setAttribute("id", offerUser.getId());
             request.getSession().setAttribute("name", offerUser.getOfferUserName());
             request.getSession().setAttribute("password", offerUser.getOfferUserPassword());
