@@ -14,24 +14,6 @@
 		parent.document.getElementById("main1").height=0;
 		parent.document.getElementById("main1").height=document.body.scrollHeight;
 	}
-	function insertTest(){
-		var font1 = document.createElement("font");
-		var font2 = document.createElement("font");
-		var font3 = document.createElement("font");
-		var font4 = document.createElement("font");
-		font1.style="font-weight:bold;font-size:30px;";
-		font2.style="font-weight:bold;font-size:30px;";
-		font3.style="font-weight:bold;font-size:30px;";
-		font4.style="font-weight:bold;font-size:30px;";
-		font1.innerHTML="<br/>##个人简历<br/>"
-		font2.innerHTML="##技术经历和项目技术细节<br/>"
-		font3.innerHTML="##其他开源项目和个人作品<br/>"
-		font4.innerHTML="##理想团队<br/>";
-		document.getElementById("descript_html").contentWindow.document.body.appendChild(font1);
-		document.getElementById("descript_html").contentWindow.document.body.appendChild(font2);
-		document.getElementById("descript_html").contentWindow.document.body.appendChild(font3);
-		document.getElementById("descript_html").contentWindow.document.body.appendChild(font4);
-	}
 </script>
 <body bgcolor="#FFF" onload="test()">
 	<div style="width:100%;">
@@ -40,27 +22,25 @@
 			<tr>
 				<td width="40px"/>
 				<td width="54%">
-					<font style="font-size:20px;" color="#4F4F4F">个人作品</font>
+					<font style="font-size:20px;" color="#4F4F4F">隐私保护</font>
 				</td>
 				<td class="textC" width="19%">
 				</td>
 				<td/>
 			</tr>
-			<tr height="26px"/>
+			<tr height="20px"/>
 			<tr>
 				<td/>
-				<td colspan="2">
-					<font color="#4F4F4F" style="font-size:16px;" >介绍一下自己的作品</font>
+				<td colspan="3">
+					<font color="#9A9A9A" style="font-size:16px;" >可以填写你想屏蔽的公式邮箱后缀，让他们无法查看你的简历</font>
 				</td>
-				<td/>
 			</tr>
 			<tr height="29px"/>
 			<tr>
 				<td/>
-				<td colspan="2" height="420px">
-					<textarea rows="28" style="width:100%;min-width:300px;" id="descript"></textarea>
+				<td colspan="3">
+					<input type="text" class="form-control" placeholder="assss@baidu.com" style="width: 42% !important;min-width:200px;">
 				</td>
-				<td/>
 			</tr>
 			<tr height="50px"/>
 			<tr>

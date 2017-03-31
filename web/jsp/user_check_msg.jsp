@@ -8,16 +8,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 <script language="javascript">
-	window.history.forward(1);
-	function goSubmit() {
-		var url = "register/firm.do";
+	function goSubmit()  {
+		var url = "login/user.do";
 		var formId = "loginForm";
 		ajaxSumbit(url, formId);
 	}
 </script>
-<frameset rows="*,45" frameborder="no" border="0"
+<frameset rows="*,6%" frameborder="no" border="0"
 	framespacing="0">
-	<frame src="mainaccount_excited.jsp" name="mainFrame" scrolling="auto"
+	<frame src="mainuser_check_msg.jsp" name="mainFrame" scrolling="auto"
 		noresize="noresize" id="mainFrame" title="mainFrame" />
 	<frame src="bottom.jsp" name="topFrame" scrolling="auto" noresize="noresize"
 		id="topFrame" title="topFrame" />

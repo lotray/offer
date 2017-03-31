@@ -10,6 +10,7 @@
 <style>
 </style>
 <script language="javascript">
+
 </script>
 <body bgcolor="#F5F8F9">
 	<form id="loginForm">
@@ -53,7 +54,7 @@
 				<tr>
 					<td width="123px"/>
 					<td class="textC">
-						<font style="font-size:24px;" color="#4F4F4F">查收确认信</font>
+						<font style="font-size:24px;" color="#4F4F4F">该账号已激活</font>
 					</td>
 					<td width="123px"/>
 				</tr>
@@ -61,44 +62,25 @@
 				<tr height="2px">
 					<td colspan="3" style="background:#00B38A;" />
 				</tr>
-				<tr height="56px"/>
+				<tr height="88px"/>
 				<tr>
 					<td/>
-					<td>
-						<font style="font-size:16px" color="#4F4F4F">确认信已经发到你的邮箱.................，你需要点击邮件中的确认链接来完成注册。</font>
+					<td class="textC">
+						<font style="font-size:16px" color="#4F4F4F">请贵公司尽快完善企业信息，并提交审核。</font>
 					</td>
 					<td/>
 				</tr>
 				<tr height="55px"/>
-				<tr height="30px">
+				<tr>
 					<td/>
-					<td>
-						<font style="font-size:16px" color="#4F4F4F">没有收到确认信怎么办？</font>
+					<td class="textC">
+						<button type="button" class="btn btn-default" style="width:280px;color:#FFF;background:#00B38A;" onclick="javascript:top.location.href='firm_resume_add.jsp'">
+							填写企业信息
+						</button>
 					</td>
 					<td/>
 				</tr>
-				<tr height="30px">
-					<td/>
-					<td>
-						<font style="font-size:16px" color="#9A9A9A">• 检查一下上面Email地址是否正确，错了就重新注册一次吧 </font>
-					</td>
-					<td/>
-				</tr>
-				<tr height="30px">
-					<td/>
-					<td>
-						<font style="font-size:16px" color="#9A9A9A">• 看看是否在邮箱的垃圾箱里</font>
-					</td>
-					<td/>
-				</tr>
-				<tr height="30px">
-					<td/>
-					<td>
-						<font style="font-size:16px" color="#9A9A9A">• 稍等几分钟，若仍旧没收到确认信，重新发送验证邮件</font>
-					</td>
-					<td/>
-				</tr>
-				<tr height="57px"/>
+				<tr height="90px"/>
 			</table>
 		</div>
 	</center>
