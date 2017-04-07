@@ -334,22 +334,14 @@ public class OfferUserController extends BaseController {
 			map.put("protect", protect);
 			
 			Map<String, String> informationMap1 = new HashMap<String, String>();
-//			File file=new File("../upload/photo/"+offerUser.getId()+".jpg"); 
-//			if (!file.exists()) {
-//			   String nameString = ChinaInitial.getPYIndexStr(offerUser.getOfferUserName(), true);
-//				informationMap1.put("userPhoto", "../img/font/"+nameString.toCharArray()[0]+".png");
-//			}
-//			else {
-//				informationMap1.put("userPhoto", "../upload/photo/"+offerUser.getId()+".jpg");
-//			}
-			List<OfferPhoto> offerPhotos = offerPhotoService.findByCandidateId(userId);
-			if (offerPhotos.size() > 0) {
-			   informationMap1.put("userPhoto", "../upload/photo/"+offerPhotos.get(0).getPhotoSavename());
-         }
-			else {
-			   String nameString = ChinaInitial.getPYIndexStr(offerUser.getOfferUserName(), true);
-			   informationMap1.put("userPhoto", "../img/font/"+nameString.toCharArray()[0]+".png");
-         }
+			File file=new File("../upload/photo/"+offerUser.getId()+".jpg"); 
+			if(!file.exists())    
+			{    String nameString = ChinaInitial.getPYIndexStr(offerUser.getOfferUserName(), true);
+				informationMap1.put("userPhoto", "../img/font/"+nameString.toCharArray()[0]+".png");
+			} else {
+				informationMap1.put("userPhoto", "../upload/photo/"+offerUser.getId()+".jpg");
+			}
+			
 			informationMap1.put("userName", offerUser.getOfferUserName() == null ? "" : offerUser.getOfferUserName());
 			informationMap1.put("simpleResume", ("1".equals(returnString(offerUserInformations.getOfferUserSex())) ? "男" : "女")+ "&nbsp;&nbsp;&nbsp;" + (returnString(offerUserInformations.getOfferUserAge()).equals("") ? "" : (offerUserInformations.getOfferUserAge().toString() + "岁")));
 			informationMap1.put("email", offerUser.getOfferUserEmail() == null ? "" : offerUser.getOfferUserEmail());
@@ -377,28 +369,20 @@ public class OfferUserController extends BaseController {
 			
 			Map<String, Object> skillMap = new HashMap<String, Object>();
 			List<Map<String, String>> skillList1 = new ArrayList<Map<String, String>>();
+			String a1 = offerUserInformations.getOfferUserDescription()==null?"":offerUserInformations.getOfferUserDescription();
+			String[] a = a1.split("；");
+			for(int i = 0; i < a.length; i++){
+				System.out.println(a[i]);
+				Map<String, String> skillMap1 = new HashMap<String, String>();
+				skillMap1.put("str", a[i]);
+				skillList1.add(skillMap1);
+			}
 			List<Map<String, String>> skillList2 = new ArrayList<Map<String, String>>();
-			String a1 = returnString(offerUserInformations.getOfferUserDescription());
-			if (!"".equals(a1)) {
-	         String[] a = a1.split("；");
-	         for (String string : a) {
-	            Map<String, String> skillMap1 = new HashMap<String, String>();
-	            skillMap1.put("str", string);
-	            skillList1.add(skillMap1);
-	            skillList2.add(skillMap1);
-	         }
-         }
-//			for(int i = 0; i < a.length; i++){
-//				System.out.println(a[i]);
-//				Map<String, String> skillMap1 = new HashMap<String, String>();
-//				skillMap1.put("str", a[i]);
-//				skillList1.add(skillMap1);
-//			}
-//			for(int i = 0; i < a.length; i++){
-//				Map<String, String> skillMap2 = new HashMap<String, String>();
-//				skillMap2.put("str", a[i]);
-//				skillList2.add(skillMap2);
-//			}
+			for(int i = 0; i < a.length; i++){
+				Map<String, String> skillMap2 = new HashMap<String, String>();
+				skillMap2.put("str", a[i]);
+				skillList2.add(skillMap2);
+			}
 			skillMap.put("skillList1", skillList1);
 			skillMap.put("skillList2", skillList2);
 			map.put("skillTd", skillMap);

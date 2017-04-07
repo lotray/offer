@@ -15,23 +15,17 @@
 		der.style.background="#000";
 	}
 	function init() {
-		if(isResetLogin()) {
-			alert("登陆超时!");
-			top.location.href='login.jsp';
-		}
-		else{
-			var url = "user/resumeeditPage1.do";
-			var data = ajaxSumbitNoform(url, "123");
-			addgou(data);
-			addinformation1(data.informationTd1);
-			addinformation2(data.informationTd2);
-			addskillTd(data.skillTd);
-			addworkTd(data.workTd);
-			addeducationTd(data.educationTd);
-			adddescriptionTd(data.descriptionTd);
-			addworksTd(data.worksTd);
-			addprotectTd(data.protectTd);
-		}
+		 var url = "user/resumeeditPage1.do";
+		var data = ajaxSumbitNoform(url, "123");
+		addgou(data);
+		addinformation1(data.informationTd1);
+		addinformation2(data.informationTd2);
+		addskillTd(data.skillTd);
+		addworkTd(data.workTd);
+		addeducationTd(data.educationTd);
+		adddescriptionTd(data.descriptionTd);
+		addworksTd(data.worksTd);
+		addprotectTd(data.protectTd); 
 	}
 	function addgou(data){
 		document.getElementById("integrity").innerText = data.integrity;
@@ -190,10 +184,10 @@
 												+ "<td>"
 												+ "<font size='3' style='font-weight:bold;margin-left:30px;'>教育经历</font>"
 													+ "<ul>";
-			for(var i in item.educationList){
-				education = education + "<li><font size='1' color='#666666'>"+item.educationList[i].str+"</font></li>";
-			}
-			education = education + "</ul>"
+		for(var i in item.educationList){
+			education = education + "<li><font size='1' color='#666666'>"+item.educationList[i].str+"</font></li>";
+		}
+		education = education + "</ul>"
 												+ "</td>"
 												+ "<td width='20%' class='textC' valign='top'>"
 													+ "<a href='#' onclick='javascript:top.location.href=\"resume_edit_type.jsp?4\"' >"

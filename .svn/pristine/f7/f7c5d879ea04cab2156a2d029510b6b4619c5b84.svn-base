@@ -37,6 +37,7 @@
 		editId(data.cityIdList, "city");
 		editId(data.firmIdList, "firm");
 		$("#saveresumeAddQuestionnaireForm").populateForm(data);
+		moneysum();
 		var jobstatus = document.getElementById("jobstatus").value;
 		if (jobstatus != "") {
 			document.getElementById(jobstatus).setAttribute("class","circleA");
@@ -45,7 +46,6 @@
 		if (intime != "") {
 			document.getElementById(intime).setAttribute("class","circleA");
 		}
-		moneysum();
 		parent.document.getElementById("main1").height=0;
 		parent.document.getElementById("main1").height=document.body.scrollHeight;
 	}
@@ -257,7 +257,6 @@
 							</td>
 							<td width="3%"/>
 							<td width="140px">
-								<input type="hidden" id="offerUserNowYearWages" name="offerUserNowYearWages"/>
 								<input type="text" class="form-control" style="width:140px;" onchange="moneysum()" id="offerEveryMonthWages" name="offerEveryMonthWages"/>
 							</td>
 							<td class="textC" width="4%" style="min-width:50px;">

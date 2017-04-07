@@ -315,11 +315,11 @@ public class OfferUserController extends BaseController {
 			if ("1".equals(education))index++;
 			String project = "0";//offerUserWorkss.size()>0?"1":"0";
 			if ("1".equals(project))index++;
-			String description = offerUserInformations.getOfferDescription()!=null?"1":"0";
+			String description = "0";//offerUserInformations.getOfferUserDescription()!=null?"1":"0";
 			if ("1".equals(description))index++;
-			String works = offerUserInformations.getOfferUserOpus()!=null?"1":"0";
+			String works = "0";//offerUserInformations.getOfferUserDescription()!=null?"1":"0";
 			if ("1".equals(works))index++;
-			String protect = offerUserInformations.getEndless()!=null?"1":"0";
+			String protect = offerUserShields.size()>0?"1":"0";
 			if ("1".equals(protect))index++;
 			String integrity = String.valueOf((int)(index/8*100))+"%";
 			
@@ -334,22 +334,14 @@ public class OfferUserController extends BaseController {
 			map.put("protect", protect);
 			
 			Map<String, String> informationMap1 = new HashMap<String, String>();
-//			File file=new File("../upload/photo/"+offerUser.getId()+".jpg"); 
-//			if (!file.exists()) {
-//			   String nameString = ChinaInitial.getPYIndexStr(offerUser.getOfferUserName(), true);
-//				informationMap1.put("userPhoto", "../img/font/"+nameString.toCharArray()[0]+".png");
-//			}
-//			else {
-//				informationMap1.put("userPhoto", "../upload/photo/"+offerUser.getId()+".jpg");
-//			}
-			List<OfferPhoto> offerPhotos = offerPhotoService.findByCandidateId(userId);
-			if (offerPhotos.size() > 0) {
-			   informationMap1.put("userPhoto", "../upload/photo/"+offerPhotos.get(0).getPhotoSavename());
-         }
-			else {
-			   String nameString = ChinaInitial.getPYIndexStr(offerUser.getOfferUserName(), true);
-			   informationMap1.put("userPhoto", "../img/font/"+nameString.toCharArray()[0]+".png");
-         }
+			File file=new File("../upload/photo/"+offerUser.getId()+".jpg"); 
+			if(!file.exists())    
+			{    String nameString = ChinaInitial.getPYIndexStr(offerUser.getOfferUserName(), true);
+				informationMap1.put("userPhoto", "../img/font/"+nameString.toCharArray()[0]+".png");
+			} else {
+				informationMap1.put("userPhoto", "../upload/photo/"+offerUser.getId()+".jpg");
+			}
+			
 			informationMap1.put("userName", offerUser.getOfferUserName() == null ? "" : offerUser.getOfferUserName());
 			informationMap1.put("simpleResume", ("1".equals(returnString(offerUserInformations.getOfferUserSex())) ? "男" : "女")+ "&nbsp;&nbsp;&nbsp;" + (returnString(offerUserInformations.getOfferUserAge()).equals("") ? "" : (offerUserInformations.getOfferUserAge().toString() + "岁")));
 			informationMap1.put("email", offerUser.getOfferUserEmail() == null ? "" : offerUser.getOfferUserEmail());
@@ -377,28 +369,20 @@ public class OfferUserController extends BaseController {
 			
 			Map<String, Object> skillMap = new HashMap<String, Object>();
 			List<Map<String, String>> skillList1 = new ArrayList<Map<String, String>>();
+			String a1 = offerUserInformations.getOfferUserDescription()==null?"":offerUserInformations.getOfferUserDescription();
+			String[] a = a1.split("；");
+			for(int i = 0; i < a.length; i++){
+				System.out.println(a[i]);
+				Map<String, String> skillMap1 = new HashMap<String, String>();
+				skillMap1.put("str", a[i]);
+				skillList1.add(skillMap1);
+			}
 			List<Map<String, String>> skillList2 = new ArrayList<Map<String, String>>();
-			String a1 = returnString(offerUserInformations.getOfferUserDescription());
-			if (!"".equals(a1)) {
-	         String[] a = a1.split("；");
-	         for (String string : a) {
-	            Map<String, String> skillMap1 = new HashMap<String, String>();
-	            skillMap1.put("str", string);
-	            skillList1.add(skillMap1);
-	            skillList2.add(skillMap1);
-	         }
-         }
-//			for(int i = 0; i < a.length; i++){
-//				System.out.println(a[i]);
-//				Map<String, String> skillMap1 = new HashMap<String, String>();
-//				skillMap1.put("str", a[i]);
-//				skillList1.add(skillMap1);
-//			}
-//			for(int i = 0; i < a.length; i++){
-//				Map<String, String> skillMap2 = new HashMap<String, String>();
-//				skillMap2.put("str", a[i]);
-//				skillList2.add(skillMap2);
-//			}
+			for(int i = 0; i < a.length; i++){
+				Map<String, String> skillMap2 = new HashMap<String, String>();
+				skillMap2.put("str", a[i]);
+				skillList2.add(skillMap2);
+			}
 			skillMap.put("skillList1", skillList1);
 			skillMap.put("skillList2", skillList2);
 			map.put("skillTd", skillMap);
@@ -421,9 +405,9 @@ public class OfferUserController extends BaseController {
 			educationMap.put("educationList", educationList);
 			map.put("educationTd", educationMap);
 			
-			Map<String, Object> descriptionMap = new HashMap<String, Object>();
-			descriptionMap.put("str", offerUserInformations.getOfferDescription());
-			map.put("descriptionTd", descriptionMap);
+//			Map<String, Object> descriptionMap = new HashMap<String, Object>();
+//			descriptionMap.put("str", offerUserInformations.getOfferUserDescription());
+//			map.put("descriptionTd", descriptionMap);
 			
 			Map<String, Object> worksMap = new HashMap<String, Object>();
 			worksMap.put("str", "GitHub："+returnString(offerUserInformations.getOfferUserGithub())+"<br>"+"知乎："+returnString(offerUserInformations.getOfferUserZhihu())+"<br>"+"博客："+returnString(offerUserInformations.getOfferUserBlog())+"<br>"+"Web站："+returnString(offerUserInformations.getOfferUserPersonWeb())+"<br>");
@@ -1019,7 +1003,7 @@ public class OfferUserController extends BaseController {
                   if (offerUserInformations.get(0).getEndless()==null || "".equals(offerUserInformations.get(0).getEndless())) {
                      offerUserInformations.get(0).setEndless(data);
                   }else {
-                     offerUserInformations.get(0).setEndless(data);
+                     offerUserInformations.get(0).setEndless(offerUserInformations.get(0).getEndless() + "," + data);
                   }
                   offerUserInformationService.updateOfferUserInformation(offerUserInformations.get(0));
                }
@@ -1037,7 +1021,7 @@ public class OfferUserController extends BaseController {
                String userId = request.getSession().getAttribute("id").toString();
                List<OfferUserInformation> offerUserInformations = offerUserInformationService.getOfferUserInformation4UserId(Integer.parseInt(userId));
                if (offerUserInformations.size()>0) {
-                  return returnString(offerUserInformations.get(0).getOfferDescription().toString());
+                  return returnString(offerUserInformations.get(0).getOfferUserDescription().toString());
                }else {
                   return "";
                }
@@ -1055,10 +1039,10 @@ public class OfferUserController extends BaseController {
                String userId = request.getSession().getAttribute("id").toString();
                List<OfferUserInformation> offerUserInformations = offerUserInformationService.getOfferUserInformation4UserId(Integer.parseInt(userId));
                if (offerUserInformations.size()>0) {
-                  if (offerUserInformations.get(0).getOfferDescription()==null || "".equals(offerUserInformations.get(0).getOfferDescription())) {
-                     offerUserInformations.get(0).setOfferDescription(data);
+                  if (offerUserInformations.get(0).getOfferUserDescription()==null || "".equals(offerUserInformations.get(0).getOfferUserDescription())) {
+                     offerUserInformations.get(0).setOfferUserDescription(data);
                   }else {
-                     offerUserInformations.get(0).setOfferDescription(data);
+                     offerUserInformations.get(0).setOfferUserDescription(offerUserInformations.get(0).getOfferUserDescription() + "," + data);
                   }
                   offerUserInformationService.updateOfferUserInformation(offerUserInformations.get(0));
                }
@@ -1097,7 +1081,7 @@ public class OfferUserController extends BaseController {
                   if (offerUserInformations.get(0).getOfferUserOpus()==null || "".equals(offerUserInformations.get(0).getOfferUserOpus())) {
                      offerUserInformations.get(0).setOfferUserOpus(data);
                   }else {
-                     offerUserInformations.get(0).setOfferUserOpus(data);
+                     offerUserInformations.get(0).setOfferUserOpus(offerUserInformations.get(0).getOfferUserOpus() + "," + data);
                   }
                   offerUserInformationService.updateOfferUserInformation(offerUserInformations.get(0));
                }
@@ -1382,17 +1366,16 @@ public class OfferUserController extends BaseController {
             map.put("dataName", list1.get(0).get("status").equals("4") ? "1" : "0");//.equals("1") ? "1" : "0"
             List<OfferUserWorks> offerUserWorks = baseService.getOfferUserWorks(offerUserId);
             List<Map<String, String>> list = new ArrayList<Map<String,String>>();
-//            if (offerUserWorks.size() > 0) {
-//               OfferUserWorks offerUserWork = offerUserWorks.get(offerUserWorks.size() - 1);
-//               map.put("firmName", returnString(offerUserWork.getOldFirmName()));
-//               map.put("jobName", returnString(offerUserWork.getJobName()));
-//               map.put("jobstart", returnString(offerUserWork.getStartTime()));
-//               map.put("jobend", returnString(offerUserWork.getEndTime()));
-//               map.put("workcontent", returnString(offerUserWork.getJobDescript()));
-//               map.put("offerUserWorksId", offerUserWork.getId());
-//               if (offerUserWorks.size() > 1) {
-//                  for (int i = 0; i < offerUserWorks.size() - 1; i++) {
-                  for (int i = 0; i < offerUserWorks.size(); i++) {
+            if (offerUserWorks.size() > 0) {
+               OfferUserWorks offerUserWork = offerUserWorks.get(offerUserWorks.size() - 1);
+               map.put("firmName", returnString(offerUserWork.getOldFirmName()));
+               map.put("jobName", returnString(offerUserWork.getJobName()));
+               map.put("jobstart", returnString(offerUserWork.getStartTime()));
+               map.put("jobend", returnString(offerUserWork.getEndTime()));
+               map.put("workcontent", returnString(offerUserWork.getJobDescript()));
+               map.put("offerUserWorksId", offerUserWork.getId());
+               if (offerUserWorks.size() > 1) {
+                  for (int i = 0; i < offerUserWorks.size() - 1; i++) {
                      Map<String, String> newMap = new HashMap<String, String>();
                      newMap.put("firmName", returnString(offerUserWorks.get(i).getOldFirmName()));
                      newMap.put("jobName", returnString(offerUserWorks.get(i).getJobName()));
@@ -1402,8 +1385,8 @@ public class OfferUserController extends BaseController {
                      newMap.put("thisId", returnString(offerUserWorks.get(i).getId()));
                      list.add(newMap);
                   }
-//               }
-//            }
+               }
+            }
             map.put("otherWorks", list);
             return toJson(map);
          } catch (Exception e) {
@@ -1511,17 +1494,16 @@ public class OfferUserController extends BaseController {
             map.put("dataName", list1.get(0).get("status").equals("4") ? "1" : "0");//.equals("1") ? "1" : "0"
             List<OfferUserEducation> offerUserEducations = baseService.getOfferUserEducations(offerUserId);
             List<Map<String, String>> list = new ArrayList<Map<String,String>>();
-//            if (offerUserEducations.size() > 0) {
-//               OfferUserEducation offerUserEducation = offerUserEducations.get(offerUserEducations.size() - 1);
-//               map.put("schoolName", returnString(offerUserEducation.getSchoolName()));
-//               map.put("xueli", returnString(offerUserEducation.getOfferUserXueli()));
-//               map.put("studstart", returnString(offerUserEducation.getStarTime()));
-//               map.put("studend", returnString(offerUserEducation.getEndTime()));
-//               map.put("zhuanye", returnString(offerUserEducation.getUserMajor()));
-//               map.put("offerUserEducationId", offerUserEducation.getId());
-//               if (offerUserEducations.size() > 1) {
-//                  for (int i = 0; i < offerUserEducations.size() - 1; i++) {
-               for (int i = 0; i < offerUserEducations.size(); i++) {
+            if (offerUserEducations.size() > 0) {
+               OfferUserEducation offerUserEducation = offerUserEducations.get(offerUserEducations.size() - 1);
+               map.put("schoolName", returnString(offerUserEducation.getSchoolName()));
+               map.put("xueli", returnString(offerUserEducation.getOfferUserXueli()));
+               map.put("studstart", returnString(offerUserEducation.getStarTime()));
+               map.put("studend", returnString(offerUserEducation.getEndTime()));
+               map.put("zhuanye", returnString(offerUserEducation.getUserMajor()));
+               map.put("offerUserEducationId", offerUserEducation.getId());
+               if (offerUserEducations.size() > 1) {
+                  for (int i = 0; i < offerUserEducations.size() - 1; i++) {
                      Map<String, String> newMap = new HashMap<String, String>();
                      newMap.put("schoolName", returnString(offerUserEducations.get(i).getSchoolName()));
                      newMap.put("xueli", returnString(offerUserEducations.get(i).getOfferUserXueli()));
@@ -1531,8 +1513,8 @@ public class OfferUserController extends BaseController {
                      newMap.put("thisId", returnString(offerUserEducations.get(i).getId()));
                      list.add(newMap);
                   }
-//               }
-//            }
+               }
+            }
             map.put("otherEducate", list);
             return toJson(map);
          } catch (Exception e) {

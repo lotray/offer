@@ -317,7 +317,7 @@
 			}
 		}
 	}
-	/* function checkDate(str, start, end, name) {
+	function checkDate(str, start, end, name) {
 		var flag = false;
 		var date = new Date;
 		var year = date.getFullYear(); 
@@ -373,7 +373,7 @@
 				return checkDate("noCheck", studstart, studend, "教育");
 			}
 		}
-	} */
+	}
 	function editWork(obj) {
 		if (checkValueWorkKuang()) {
 			if(confirm("是否先保存下面的数据？")) {

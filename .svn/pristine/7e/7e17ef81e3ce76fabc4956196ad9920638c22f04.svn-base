@@ -67,33 +67,6 @@ function ajaxSumbitNoform(urllink,str) {
 	return dataResult;
 }
 
-function ajaxSumbitNoformofstring(urllink,str) {
-	var link = "/hibernateMvc/" + urllink;
-	var dataResult;
-	$.ajax({
-		url : link, // 自行按需配置好完整的url，包括ip和端口号
-		type : "POST",
-		datatype : "text",
-		data : str,
-		contentType : "application/text",
-		async:false,
-		error: function(request) {
-			alert("Connection error");
-		},
-		success: function(result) {
-			if(result == undefined){
-				alert("数据错误！");
-			}
-			if(result.status == '1'){
-				alert("数据错误！");
-			}
-			dataResult = result;
-		}
-	});
-
-	return dataResult;
-}
-
 function obj2string(o){ 
 	 var r=[]; 
 	 if(typeof o=="string"){ 
