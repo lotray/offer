@@ -1,4 +1,4 @@
-package com.offer.job.impl;
+package com.offer.job.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +29,11 @@ public class OfferMatchStatus extends BaseServiceImpl implements CheckArtAuction
 		if(list != null && list.size() > 0){
 			days  = map.get(list.get(0).get("TJ_T"));
 		}
-		String sql = "delete from offer_match m WHERE datediff(now(), m.match_time) > " + days;
-		baseDao.deleteBySql(sql);
+		String editsql = "update offer_match m set status='2' where datediff(now(), m.match_time) > " + days;
+		String delsql = "delete from offer_match WHERE datediff(now(), match_time) > 30";
+//		baseDao.updateBySql(editsql);
+//		baseDao.deleteBySql(delsql);
+		String[] sqls = {editsql, delsql};
+		baseDao.sendByBatchSql(sqls);
 	}
 }

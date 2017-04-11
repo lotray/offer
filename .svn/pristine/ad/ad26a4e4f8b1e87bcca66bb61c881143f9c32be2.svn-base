@@ -1,4 +1,4 @@
-package com.offer.job.impl;
+package com.offer.job.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;

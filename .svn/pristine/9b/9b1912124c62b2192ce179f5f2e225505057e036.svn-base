@@ -1,4 +1,4 @@
-package com.offer.job.impl;
+package com.offer.job.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class OfferEmailStatus extends BaseServiceImpl implements CheckArtAuction
 	@Override
 	public void executeCheck() throws Exception {
 		try {
-			Map<String, String> map = new HashMap<String, String>();
+ 			Map<String, String> map = new HashMap<String, String>();
 			map.put("status", "1");
 			List<OfferUserEmail> offerUserEmails = (List<OfferUserEmail>) baseDao.findField(OfferUserEmail.class, map);
 			for(OfferUserEmail email : offerUserEmails){
