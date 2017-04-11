@@ -52,4 +52,6 @@ public interface OfferFirmService {
 	public List<Map<String, String>> getfrimtuijianUsery(String userId,String frimId, Map<String, String> nowMap) throws Exception;
 	
 	public List<Map<String, String>> getfrimfinduser(String cityIds,String jobIds, String yearIds) throws Exception;
+	
+	public List<Map<String, String>> getfrimfinduser4two(String cityIds,String jobIds, String yearIds) throws Exception;
 }

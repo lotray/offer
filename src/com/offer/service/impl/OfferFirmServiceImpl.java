@@ -601,6 +601,19 @@ public class OfferFirmServiceImpl extends BaseServiceImpl implements OfferFirmSe
 		return list;
 	}
 	
+	  @Override
+	   public List<Map<String, String>> getfrimfinduser4two(String cityIds,String jobIds, String yearIds) throws Exception {
+	      // TODO Auto-generated method stub
+	      StringBuffer param = new StringBuffer();
+	      Map<String, String> map = new HashMap<String, String>();
+	      param.append( " AND (oui.offer_user_worktime = '"+yearIds+"' OR oui.offer_user_job1 in ("+jobIds+
+	                 ") OR oui.offer_user_job2 in ("+jobIds+
+	                 ") OR oc.id in ("+cityIds+"))");
+	      map.put("param", param.toString());
+	      List<Map<String, String>> list = baseDao.findByQuery("/sql/sql_finduser_tuijian.xml", map);
+	      return list;
+	   }
+	
 	@Autowired
 	private OfferFirmSelectService offerFirmSelectService;
 

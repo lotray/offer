@@ -64,6 +64,9 @@ public class OfferUser {
 
    @Column(name = "last_login_time")
    private Date    lastLoginTime;
+   
+   @Column(name = "last_match_time")
+   private Date    lastMatchTime;
 
    @Column(name = "is_admin")
    private Integer isAdmin;
@@ -222,4 +225,14 @@ public class OfferUser {
    public void setTeamPeopleStatus(Integer teamPeopleStatus) {
       this.teamPeopleStatus = teamPeopleStatus;
    }
+
+   public Date getLastMatchTime() {
+      return lastMatchTime;
+   }
+
+   public void setLastMatchTime(Date lastMatchTime) {
+      this.lastMatchTime = lastMatchTime;
+   }
+   
+   
 }

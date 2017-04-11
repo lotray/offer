@@ -1,6 +1,9 @@
 package com.offer.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +18,6 @@ import com.offer.service.OfferPhotoService;
 public class OfferMatchServiceImpl extends BaseServiceImpl implements OfferMatchService{
 
 	@Override
-	public OfferMatch getOfferMatch(Integer id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public void saveOfferMatch(String offerUserId, String firmId,
 			String houxuanrenId) throws Exception {
 	      OfferMatch offerMatch = new OfferMatch();
@@ -32,6 +29,15 @@ public class OfferMatchServiceImpl extends BaseServiceImpl implements OfferMatch
 	      baseDao.save(offerMatch);
 		
 	}
-	   @Autowired
-	   private BaseDao baseDao;
+	
+   @Override
+   public List<OfferMatch> getOfferMatch4offerUserId(String id) throws Exception {
+      Map<String, String> map = new HashMap<String, String>();//所有的工作数据,不添加任何条件
+      map.put("firmUserId", id);
+      return (List<OfferMatch>) baseDao.findField(OfferMatch.class, map);
+   }
+
+   @Autowired
+   private BaseDao baseDao;
+
 }

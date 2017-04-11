@@ -29,6 +29,7 @@ import com.offer.model.OfferFirmSelect;
 import com.offer.model.OfferInvite;
 import com.offer.model.OfferInviteChat;
 import com.offer.model.OfferJob;
+import com.offer.model.OfferMatch;
 import com.offer.model.OfferPhoto;
 import com.offer.model.OfferUser;
 import com.offer.model.OfferUserInformation;
@@ -1049,10 +1050,16 @@ public class OfferFirmController extends BaseController {
             nowMap.put("jobIds", jobIds);
          }
          
-         List<Map<String, String>> findusersList = offerFirmService.getfrimfinduser(cityIds, jobIds, yearIds);
-         for (int i = 0; i < findusersList.size(); i++) {
-        	 offerMatchService.saveOfferMatch(offerUserId, request.getSession().getAttribute("firmId").toString(), returnString(findusersList.get(i).get("id")));
-		}
+         List<OfferMatch> offerMatchs = offerMatchService.getOfferMatch4offerUserId(offerUserId);
+         if (offerMatchs.size()>0) {
+            List<Map<String, String>> findusersList = offerFirmService.getfrimfinduser(cityIds, jobIds, yearIds);
+         }else {
+            List<Map<String, String>> findusersList = offerFirmService.getfrimfinduser(cityIds, jobIds, yearIds);
+            for (int i = 0; i < findusersList.size(); i++) {
+             offerMatchService.saveOfferMatch(offerUserId, request.getSession().getAttribute("firmId").toString(), returnString(findusersList.get(i).get("id")));
+            }
+         }
+         
          
          
          
